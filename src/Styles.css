@@ -1,0 +1,402 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #000000;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", roboto, sans-serif;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+/* Canvas de fondo fijo */
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    z-index: 1;
+}
+
+/* Contenedor de Diapositivas flotando encima */
+#presentation-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 6vw;
+    box-sizing: border-box;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(20px);
+}
+
+.slide.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Imagen de fondo semitransparente por slide — z-index entre partículas y texto */
+.slide-photo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    /* Detrás del texto (z-index 5) pero encima del canvas (z-index 1) y los radiales (z-index 2) */
+    z-index: 3;
+    opacity: 0;
+    pointer-events: none;
+    /* Se funde con el negro del fondo y el brillo aditivo de las partículas */
+    mix-blend-mode: screen;
+    /* Fallback: si la imagen no carga, el elemento es invisible sin error visual */
+    background-color: transparent;
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* La foto aparece solo cuando la slide está activa */
+.slide.active .slide-photo {
+    opacity: 0.30;
+}
+
+/* Reglas Estructurales de Composición: TEXT ZONE vs VISUAL ZONE */
+.slide.layout-text-left-visual-right,
+.slide.align-left {
+    justify-content: flex-start;
+}
+
+.slide.layout-text-right-visual-left,
+.slide.align-right {
+    justify-content: flex-end;
+}
+
+.slide.layout-text-center {
+    justify-content: center;
+}
+
+.slide-content {
+    max-width: 480px;
+    width: 42vw;
+    min-width: 320px;
+    padding: 34px 40px;
+    background: rgba(0, 0, 0, 0.58);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 42, 133, 0.16);
+    border-left: 3px solid rgba(255, 42, 133, 0.55);
+    border-radius: 6px;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        0 16px 52px rgba(0, 0, 0, 0.90),
+        0 0 50px rgba(180, 0, 30, 0.10);
+    position: relative;
+    z-index: 5;
+    pointer-events: auto;
+}
+
+.slide-content.narrow {
+    max-width: 360px;
+    width: 28vw;
+    min-width: 260px;
+}
+
+.tag {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #ff2a85;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+h1,
+h2 {
+    font-size: 42px;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+    line-height: 1.15;
+}
+
+p {
+    font-size: 20px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+}
+
+.media-tag {
+    display: inline-block;
+    margin-top: 15px;
+    font-size: 13px;
+    color: #457b9d;
+    background: rgba(69, 123, 157, 0.15);
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: 1px solid rgba(69, 123, 157, 0.3);
+}
+
+/* Logo estático en la esquina, visible en todas las diapositivas */
+#corner-logo {
+    position: fixed;
+    top: -10px;
+    left: 24px;
+    z-index: 100;
+    width: 300px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+#corner-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+#logo-placeholder {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border: 1px dashed rgba(255, 255, 255, 0.35);
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.45);
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+/* Segundo logo estático, esquina opuesta */
+#corner-logo-2 {
+    position: fixed;
+    top: 24px;
+    right:24px;
+    z-index: 100;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+#corner-logo-2 img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+#logo-placeholder-2 {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border: 1px dashed rgba(255, 255, 255, 0.35);
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.45);
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* Selector de idioma ES / PT */
+#lang-switch {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 100;
+    display: flex;
+    gap: 6px;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 20px;
+    padding: 5px;
+}
+
+.lang-btn {
+    border: none;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 6px 12px;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.lang-btn:hover {
+    color: #ffffff;
+}
+
+.lang-btn.active {
+    background: #ff2a85;
+    color: #ffffff;
+}
+
+/* Capa de degradados ambientales rojos */
+#bg-radials {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 3;
+    pointer-events: none;
+}
+/* Fondo general con degradado hacia rojo */
+#bg-gradient {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(160deg, #000000 0%, #1a0006 55%, #3d0010 100%);
+}
+
+/* Menú de Navegación Flotante Inferior */
+#bottom-nav {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(0, 0, 0, 0.78);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 30px;
+    padding: 8px 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.85), 0 0 25px rgba(255, 42, 133, 0.18);
+}
+
+#bottom-nav button {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    outline: none;
+}
+
+#bottom-nav button:hover {
+    background: rgba(255, 42, 133, 0.4);
+    border-color: #ff2a85;
+    transform: scale(1.12);
+    box-shadow: 0 0 14px rgba(255, 42, 133, 0.6);
+}
+
+#bottom-nav button:active {
+    transform: scale(0.95);
+}
+
+#nav-indicator {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.92);
+    min-width: 140px;
+    text-align: center;
+    user-select: none;
+}
+
+#btn-restart {
+    font-size: 15px;
+}
+
+/* Slide de cierre: 2 espacios para QR con texto de link debajo */
+.qr-content {
+    max-width: 560px !important;
+    width: 46vw !important;
+}
+
+.qr-grid {
+    display: flex;
+    gap: 24px;
+    margin-top: 20px;
+}
+
+.qr-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.qr-box {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    max-width: 160px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px dashed rgba(255, 255, 255, 0.35);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qr-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+.qr-placeholder-label {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.qr-link {
+    font-size: 13px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.75);
+    word-break: break-word;
+}

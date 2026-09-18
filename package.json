@@ -1,0 +1,13 @@
+{
+  "name": "dispositivas",
+  "version": "1.0.0",
+  "description": "Presentacion TED Talk con Three.js",
+  "main": "main.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

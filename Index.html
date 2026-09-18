@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TED Talk - Generacional Relay (@centrodeeventosupb)</title>
+
+    <!-- Google Fonts: Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./src/Styles.css">
+</head>
+
+<body>
+
+    <!-- Canvas de fondo -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Capa de degradados rojos ambientales -->
+    <div id="bg-radials"></div>
+
+    <!-- Fondo con degradado a rojo, encima del canvas -->
+<div id="bg-gradient"></div>
+
+    <!-- Logo estático (esquina), visible en todas las diapositivas -->
+    <div id="corner-logo">
+        <!-- Reemplaza el src por el logo real. Mientras tanto se muestra un placeholder. -->
+        <img id="logo-img" src="./assets/img/logo.png" alt="Logo" onerror="this.style.display='none'; document.getElementById('logo-placeholder').style.display='flex';">
+        <div id="logo-placeholder">LOGO</div>
+    </div>
+
+    <!-- Segundo logo estático (esquina opuesta) -->
+<div id="corner-logo-2">
+    <img id="logo-img-2" src="./assets/img/logo2.png" alt="Logo 2" onerror="this.style.display='none'; document.getElementById('logo-placeholder-2').style.display='flex';">
+    <div id="logo-placeholder-2">LOGO 2</div>
+</div>
+
+    <!-- Selector de idioma -->
+    <div id="lang-switch">
+        <button class="lang-btn active" data-lang="es" aria-label="Español">ES</button>
+        <button class="lang-btn" data-lang="pt" aria-label="Português">PT</button>
+    </div>
+
+    <!-- Contenedor de Diapositivas (Guión TED Talk) -->
+    <main id="presentation-container">
+
+        <!-- SLIDE 1: FLOR / EXPANSIÓN -->
+        <section class="slide active layout-text-left-visual-right" data-state="0">
+            <div class="slide-content">
+                <span class="tag" id="s1-tag">Introducción</span>
+                <h1 id="s1-title">RELEVO GENERACIONAL:<br>LA VENTAJA QUE NADIE ESTÁ APROVECHANDO</h1>
+                <p style="color: #ff2a85; font-weight: 500; margin-top: 10px;">@centrodeeventosupb</p>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: EXPANSIÓN -->
+        <section class="slide layout-text-center" data-state="1">
+            <img class="slide-photo" src="./assets/img/foto-1.jpg" alt="" aria-hidden="true">
+            <div class="slide-content">
+                <h2 id="s2-title">¿Un gran auditorio solo para hacer grados?</h2>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: ATRACCIÓN / UNIVERSIDAD + MUNDO -->
+        <section class="slide layout-text-right-visual-left" data-state="2">
+            <div class="slide-content narrow">
+                <p style="font-size: 26px; font-weight: 300; line-height: 1.4;" id="s3-text">
+                    Los eventos no llegaron a la Universidad.<br>
+                    <strong style="color: #ffffff; font-weight: 400;">La Universidad decidió encontrarse con el
+                        mundo.</strong>
+                </p>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: FRAGMENTACIÓN -->
+        <section class="slide layout-text-left-visual-right" data-state="3">
+            <img class="slide-photo" src="./assets/img/foto-2.jpeg" alt="" aria-hidden="true">
+            <div class="slide-content">
+                <h1 style="font-size: 52px; letter-spacing: -1px;" id="s4-title"><span style="color: #ffffff;">Academia</span> + <span style="color: #ff2a85;">Industria</span> + <span style="color: #457b9d;">Ciudad</span></h1>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: IMPACTO / EXPLOSIÓN -->
+        <section class="slide layout-text-left-visual-right" data-state="4">
+            <img class="slide-photo" src="./assets/img/foto-3.jpg" alt="" aria-hidden="true">
+            <div class="slide-content">
+                <h2 style="font-size: 38px;" id="s5-title">Los eventos nunca fueron el objetivo.</h2>
+                <p style="font-size: 32px; color: #ff2a85; font-weight: 400;" id="s5-sub">El impacto sí.</p>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: DERIVA / COMUNIDAD -->
+        <section class="slide layout-text-right-visual-left" data-state="5">
+            <div class="slide-content">
+                <p style="font-size: 26px; line-height: 1.5;" id="s6-text">
+                    Un evento trae personas.<br>
+                    <span style="color: #457b9d; font-weight: 500;">Una comunidad trae transformación.</span>
+                </p>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: CONFIANZA / CRECIMIENTO -->
+        <section class="slide layout-text-left-visual-right" data-state="6">
+            <div class="slide-content">
+                <h1 style="font-size: 46px;" id="s7-title">El talento crece a la velocidad de la confianza.</h1>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: NUEVAS RUTAS -->
+        <section class="slide layout-text-right-visual-left" data-state="7">
+            <img class="slide-photo" src="./assets/img/foto-4.jpg" alt="" aria-hidden="true">
+            <div class="slide-content">
+                <p style="font-size: 24px; line-height: 1.5;" id="s8-text">
+                    La experiencia construye el camino.<br>
+                    <strong style="color: #ffffff;">Las nuevas generaciones descubren nuevas rutas.</strong>
+                </p>
+                
+            </div>
+        </section>
+
+        <!-- SLIDE 9: DOS GENERACIONES -->
+        <section class="slide layout-text-right-visual-left" data-state="8">
+            <div class="slide-content">
+                <h1 style="font-size: 56px;" id="s9-title">Una visión.<br><span style="color: #ff2a85;">Dos generaciones.</span></h1>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: TRABAJO EN EQUIPO -->
+        <section class="slide layout-text-right-visual-left" data-state="9">
+            <div class="slide-content">
+                <p style="font-size: 26px; line-height: 1.5;" id="s10-text">
+                    El crecimiento no ocurre cuando una generación reemplaza a otra.<br>
+                    <strong style="color: #ffffff;">Ocurre cuando trabajan juntas.</strong>
+                </p>
+            </div>
+        </section>
+
+        <!-- SLIDE 11: PRESENTE -->
+        <section class="slide layout-text-left-visual-right" data-state="10">
+            <div class="slide-content">
+                <p style="font-size: 28px; line-height: 1.4;" id="s11-text">
+                    Los jóvenes no son el futuro.<br>
+                    <strong style="color: #ff2a85;">Son el presente que muchas organizaciones aún no ven.</strong>
+                </p>
+            </div>
+        </section>
+
+        <!-- SLIDE 12: FUTURO / CONSTRUCCIÓN -->
+        <section class="slide layout-text-right-visual-left" data-state="11">
+            <img class="slide-photo" src="./assets/img/foto-5.jpeg" alt="" aria-hidden="true">
+            <div class="slide-content">
+                <h1 style="font-size: 52px;" id="s12-title">El futuro no se hereda.<br><span style="color: #457b9d;">Se
+                        construye.</span></h1>
+            </div>
+        </section>
+
+        <!-- SLIDE 13: CIERRE -->
+        <section class="slide layout-text-left-visual-right" data-state="12">
+            <img class="slide-photo" src="./assets/img/foto-6.jpg" alt="" aria-hidden="true">
+            <div class="slide-content qr-content">
+                <h2 id="s13-title">Conectemos</h2>
+                <p style="margin-bottom: 6px;"><strong>@centrodeeventosupb</strong></p>
+
+                <div class="qr-grid">
+                    <div class="qr-item">
+                        <div class="qr-box">
+                         <img src="./assets/img/qr-1.png" alt="QR 1">
+                           </div>
+                        <p class="qr-link" id="s13-link1">https://www.instagram.com/centrodeeventosupb/</p>
+                    </div>
+
+                    <div class="qr-item">
+                        <div class="qr-box">
+                        <img src="./assets/img/qr-2.png" alt="QR 2">
+                       </div>
+                        <p class="qr-link" id="s13-link2"> https://www.instagram.com/centrodeeventosupb/</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- UI / NAVEGACIÓN INFERIOR FLOTANTE -->
+    <nav id="bottom-nav">
+        <button id="btn-prev" aria-label="Diapositiva anterior">&lt;</button>
+        <span id="nav-indicator">Diapositiva 1 de 13</span>
+        <button id="btn-next" aria-label="Diapositiva siguiente">&gt;</button>
+        <button id="btn-restart" aria-label="Reiniciar presentación (R)" title="Reiniciar (R)">⟲</button>
+    </nav>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js"
+            }
+        }
+    </script>
+
+    <!-- Carga del punto de entrada Javascript ESM modular -->
+    <script type="module" src="./main.js"></script>
+</body>
+
+</html>

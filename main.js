@@ -182,6 +182,11 @@ function setupNavigationUI() {
         btnRestart.addEventListener('click', restartPresentation);
     }
 
+    const btnFullscreen = document.getElementById('btn-fullscreen');
+if (btnFullscreen) {
+    btnFullscreen.addEventListener('click', toggleFullscreen);
+}
+
     updateNavIndicator();
 }
 
@@ -196,6 +201,14 @@ function updateNavIndicator() {
 function restartPresentation() {
     currentSlideIndex = 0;
     updateSlideContent();
+}
+
+function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+        document.exitFullscreen();
+    }
 }
 
 function onKeyDown(event) {

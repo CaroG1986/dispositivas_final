@@ -19,8 +19,8 @@ export const translations = {
         's11-text': 'Los jóvenes no son el futuro.<br><strong style="color: #ff2a85;">Son el presente que muchas organizaciones aún no ven.</strong>',
         's12-title': 'El futuro no se hereda.<br><span style="color: #457b9d;">Se construye.</span>',
         's13-title': 'Conectemos',
-        's13-link1': 'Pega aquí el link 1',
-        's13-link2': 'Pega aquí el link 2',
+        's13-link1': '<a href="http://instagram.com/centrodeeventosupb/" target="_blank" style="color: inherit;">http://instagram.com/centrodeeventosupb/</a>',
+        's13-link2': '<a href="https://carog1986.github.io/dispositivas_final/" target="_blank" style="color: inherit;">https://carog1986.github.io/dispositivas_final/</a>',
         'nav-label': (current, total) => `Diapositiva ${current} de ${total}`,
     },
     pt: {
@@ -39,8 +39,8 @@ export const translations = {
         's11-text': 'Os jovens não são o futuro.<br><strong style="color: #ff2a85;">São o presente que muitas organizações ainda não veem.</strong>',
         's12-title': 'O futuro não se herda.<br><span style="color: #457b9d;">Se constrói.</span>',
         's13-title': 'Vamos nos conectar',
-        's13-link1': 'Cole aqui o link 1',
-        's13-link2': 'Cole aqui o link 2',
+        's13-link1': '<a href="http://instagram.com/centrodeeventosupb/" target="_blank" style="color: inherit;">http://instagram.com/centrodeeventosupb/</a>',
+        's13-link2': '<a href="https://carog1986.github.io/dispositivas_final/" target="_blank" style="color: inherit;">https://carog1986.github.io/dispositivas_final/</a>',
         'nav-label': (current, total) => `Slide ${current} de ${total}`,
     }
 };
